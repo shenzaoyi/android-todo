@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/material_dynamic_neutral95"
+    android:layout_margin="20dp"
+    >
+
+    <TextView
+        android:id="@+id/add_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="添加日程"
+        android:textColor="@color/black"
+        ></TextView>
+
+    <EditText
+        android:id="@+id/add_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20px"
+        android:layout_marginTop="100px"
+        android:hint="标题"
+        android:minHeight="15px"></EditText>
+
+    <EditText
+        android:id="@+id/add_content"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20px"
+        android:layout_marginTop="100px"
+        android:hint="内容"
+        android:minHeight="15px"></EditText>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="截至时间"></TextView>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/add_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20px"
+            android:layout_weight="1"
+            android:background="@drawable/r"
+            android:text="选择日期"></Button>
+
+        <Button
+            android:id="@+id/add_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20px"
+            android:layout_weight="1"
+            android:background="@drawable/r"
+            android:text="选择时间"></Button>
+    </LinearLayout>
+    <CheckBox
+        android:id="@+id/im"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="重要事项: 将会标红，同时到时间会发送提醒"
+        android:layout_marginLeft="10dp"
+        >
+    </CheckBox>
+        <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/add_submit"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="确定"></Button>
+</LinearLayout>
