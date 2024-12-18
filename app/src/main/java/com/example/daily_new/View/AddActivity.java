@@ -4,6 +4,7 @@ package com.example.daily_new.View;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +22,8 @@ import com.example.daily_new.Controllers.AddController;
 import com.example.daily_new.DAO.Event;
 import com.example.daily_new.R;
 
+import org.w3c.dom.Text;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -30,6 +33,8 @@ import java.util.Calendar;
 
 public class AddActivity extends AppCompatActivity {
     private String TAG = "ERROR_ADD";
+    private boolean dateCheck = false;
+    private boolean timeCheck = false;
     private AddController addController;
     public void  datePicker() {
         Button dateButton = findViewById(R.id.add_date);
@@ -53,6 +58,7 @@ public class AddActivity extends AppCompatActivity {
                         }, year, month, day);
                 // 显示日期选择器对话框
                 datePickerDialog.show();
+                dateCheck = true;
             }
         });
     }
@@ -75,6 +81,7 @@ public class AddActivity extends AppCompatActivity {
                         }, hour, minute, true); // true 表示24小时制
                     // 显示时间选择器对话框
                     timePickerDialog.show();
+                    timeCheck = true;
             }
         });
 
@@ -89,54 +96,57 @@ public class AddActivity extends AppCompatActivity {
         }
         // 无法解析： 报错，tobe continued
         Button addDate = findViewById(R.id.add_date);
-        LocalDate localDate = null;
-        DateTimeFormatter dateTimeFormatter = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        }
-        String dateTime = (String) addDate.getText();
-        String[] dates = dateTime.split("/");
-        String day = dates[0];
-        String month = dates[1];
-        if (day.length() != 2) {
-            day = "0" + day;
-        }
-        day += "/";
-        if (month.length() != 2) {
-            month = "0" + month;
-        }
-        month += "/";
-        String newData = day + month + dates[2];
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            localDate = LocalDate.parse(newData,dateTimeFormatter);
-        }
-        Button addTime = findViewById(R.id.add_time);
-        LocalTime localTime  = null;
-        String Time = (String) addTime.getText();
-        String[] times = Time.split(":");
-        String m = "";
-        String h = "";
-        if (times[0].length() != 2) {
-            m = "0" + times[0];
-        }else{
-            m = times[0];
-        }
-        if (times[1].length() != 2) {
-            h = "0" + times[1];
-        }else{
-            h = times[1];
-        }
-        String timeNew = m + ":" + h;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            localTime = LocalTime.parse(timeNew);
-        }
-        LocalDateTime localDateTime = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            localDateTime = LocalDateTime.of(localDate,localTime);
-        }
         Long exactTime = Long.valueOf(0);
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            exactTime = localDateTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+        Log.d(TAG, "handleData: " + addDate.getText());
+        if (dateCheck && timeCheck) {
+            LocalDate localDate = null;
+            DateTimeFormatter dateTimeFormatter = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            }
+            String dateTime = (String) addDate.getText();
+            String[] dates = dateTime.split("/");
+            String day = dates[0];
+            String month = dates[1];
+            if (day.length() != 2) {
+                day = "0" + day;
+            }
+            day += "/";
+            if (month.length() != 2) {
+                month = "0" + month;
+            }
+            month += "/";
+            String newData = day + month + dates[2];
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                localDate = LocalDate.parse(newData,dateTimeFormatter);
+            }
+            Button addTime = findViewById(R.id.add_time);
+            LocalTime localTime  = null;
+            String Time = (String) addTime.getText();
+            String[] times = Time.split(":");
+            String m = "";
+            String h = "";
+            if (times[0].length() != 2) {
+                m = "0" + times[0];
+            }else{
+                m = times[0];
+            }
+            if (times[1].length() != 2) {
+                h = "0" + times[1];
+            }else{
+                h = times[1];
+            }
+            String timeNew = m + ":" + h;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                localTime = LocalTime.parse(timeNew);
+            }
+            LocalDateTime localDateTime = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                localDateTime = LocalDateTime.of(localDate,localTime);
+            }
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                exactTime = localDateTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+            }
         }
         TextView addcontent = findViewById(R.id.add_content);
         Event event = new Event(title,exactTime,im,addcontent.getText().toString());
@@ -165,6 +175,7 @@ public class AddActivity extends AppCompatActivity {
                 Event data = handleData();
                 addController.Store(data);
                 Toast.makeText(AddActivity.this,"添加成功",Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }

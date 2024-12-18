@@ -47,5 +47,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:tint="@color/white"
         app:srcCompat="@android:drawable/ic_input_add" />
-
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_retire"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:contentDescription="add"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="@color/white"
+        app:srcCompat="@android:drawable/ic_input_add" />
+    <TextView
+        android:id="@+id/add_retire"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="计算退休时间"
+        android:layout_marginTop="35dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fab_retire"
+        ></TextView>
 </androidx.constraintlayout.widget.ConstraintLayout>

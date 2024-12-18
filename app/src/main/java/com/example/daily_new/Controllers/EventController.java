@@ -1,16 +1,11 @@
 package com.example.daily_new.Controllers;
 
-import android.app.AlarmManager;
 import android.app.Application;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 
 import com.example.daily_new.DAO.Event;
 import com.example.daily_new.DAO.EventCallback;
 import com.example.daily_new.DAO.EventRepo;
-import com.example.daily_new.View.AlertReciever;
 import com.example.daily_new.View.MainActivity;
 
 import java.util.List;

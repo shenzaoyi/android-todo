@@ -20,6 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER"></category>
             </intent-filter>
         </activity>
+        <activity android:name=".View.tuixiu"></activity>
         <activity android:name=".View.AddActivity"></activity>
         <activity android:name=".View.ItemInfo"></activity>
         <receiver android:name=".View.AlertReciever" />

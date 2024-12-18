@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -23,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     private EventController eventController;
     private EventAdapter eventAdapter;
     private String TAG = "ERROR";
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +35,14 @@ public class MainActivity extends AppCompatActivity {
         eventController = new EventController(MainActivity.this);
         // Display data
         eventController.DisPlay();
+        FloatingActionButton fab1 = findViewById(R.id.fab_retire);
+        fab1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,tuixiu.class);
+                startActivity(intent);
+            }
+        });
         //  click
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
